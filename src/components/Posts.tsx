@@ -1,16 +1,16 @@
-import React from "react";
-import Link from "next/link";
-import type { Post, Photo } from "client";
-import styles from "scss/components/Posts.module.scss";
-import Heading, { HeadingProps } from "./Heading";
+import React from 'react';
+import Link from 'next/link';
+import type { Post } from 'client';
+import styles from 'scss/components/Posts.module.scss';
+import Heading, { HeadingProps } from './Heading';
 
 interface Props {
-  posts: Post[] | Photo[] | undefined;
+  posts: Post[] | undefined;
   intro?: string;
   id?: string;
   heading?: string;
-  headingLevel?: HeadingProps["level"];
-  postTitleLevel?: HeadingProps["level"];
+  headingLevel?: HeadingProps['level'];
+  postTitleLevel?: HeadingProps['level'];
   readMoreText?: string;
   postBasePath?: string;
 }
@@ -20,28 +20,27 @@ function Posts({
   intro,
   heading,
   id,
-  headingLevel = "h1",
-  postTitleLevel = "h2",
-  readMoreText = "Read more",
-  postBasePath = "posts",
+  headingLevel = 'h1',
+  postTitleLevel = 'h2',
+  readMoreText = 'Read more',
+  postBasePath = 'posts',
 }: Props): JSX.Element {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <section className={styles["posts-block"]} {...(id && { id })}>
-      <div className="wrap">
+    <section className={styles['posts-block']} {...(id && { id })}>
+      <div className='wrap'>
         {heading && (
           <Heading level={headingLevel} className={styles.heading}>
             {heading}
           </Heading>
         )}
         {intro && <p className={styles.intro}>{intro}</p>}
-        <div className="posts">
+        <div className='posts'>
           {posts.map((post) => (
             <div
               className={styles.single}
-              key={post.id ?? ""}
-              id={`post-${post.id}`}
-            >
+              key={post.id ?? ''}
+              id={`post-${post.id}`}>
               <div>
                 <Heading level={postTitleLevel} className={styles.title}>
                   <Link href={`/${postBasePath}/${post.slug}`}>
@@ -51,10 +50,10 @@ function Posts({
                 <div
                   className={styles.excerpt}
                   // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: post.excerpt() ?? "" }}
+                  dangerouslySetInnerHTML={{ __html: post.excerpt() ?? '' }}
                 />
                 <Link href={`/${postBasePath}/${post.slug}`}>
-                  <a aria-label={`Read more about ${post.title || "the post"}`}>
+                  <a aria-label={`Read more about ${post.title || 'the post'}`}>
                     {readMoreText}
                   </a>
                 </Link>
